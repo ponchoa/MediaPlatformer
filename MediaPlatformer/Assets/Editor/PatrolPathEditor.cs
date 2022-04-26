@@ -11,17 +11,18 @@ namespace Platformer
         public void OnSceneGUI()
         {
             var path = target as PatrolPath;
-            using (var cc = new EditorGUI.ChangeCheckScope())
+            EditorGUI.BeginChangeCheck();
+            var sp = path.transform.InverseTransformPoint(Handles.PositionHandle(path.transform.TransformPoint(path.startPosition), path.transform.rotation));
+            var ep = path.transform.InverseTransformPoint(Handles.PositionHandle(path.transform.TransformPoint(path.endPosition), path.transform.rotation));
+            if (EditorGUI.EndChangeCheck())
             {
-                var sp = path.transform.InverseTransformPoint(Handles.PositionHandle(path.transform.TransformPoint(path.startPosition), path.transform.rotation));
-                var ep = path.transform.InverseTransformPoint(Handles.PositionHandle(path.transform.TransformPoint(path.endPosition), path.transform.rotation));
-                if (cc.changed)
-                {
-                    sp.y = 0;
-                    ep.y = 0;
-                    path.startPosition = sp;
-                    path.endPosition = ep;
-                }
+                Undo.RecordObject(target, "Change Value");
+
+                sp.y = 0;
+                ep.y = 0;
+                path.startPosition = sp;
+                path.endPosition = ep;
+                PrefabUtility.RecordPrefabInstancePropertyModifications(target);
             }
             Handles.Label(path.transform.position, (path.startPosition - path.endPosition).magnitude.ToString());
         }

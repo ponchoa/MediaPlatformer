@@ -29,7 +29,7 @@ namespace Platformer.UI
 
         void OnEnable()
         {
-            _ToggleMainMenu(showMainCanvas);
+            //_ToggleMainMenu(showMainCanvas);
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace Platformer.UI
         {
             if (this.showMainCanvas != show)
             {
-                _ToggleMainMenu(show);
+                //_ToggleMainMenu(show);
             }
         }
 
