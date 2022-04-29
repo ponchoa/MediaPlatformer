@@ -31,6 +31,18 @@ namespace Platformer.Mechanics
             spriteRenderer = GetComponent<SpriteRenderer>();
         }
 
+        private void Start()
+        {
+            foreach (GameObject item in GameObject.FindGameObjectsWithTag("Enemy"))
+            {
+                Collider2D col = item.GetComponent<Collider2D>();
+                if (col != null && col != _collider)
+                {
+                    Physics2D.IgnoreCollision(_collider, col, true);
+                }
+            }
+        }
+
         void OnCollisionEnter2D(Collision2D collision)
         {
             var player = collision.gameObject.GetComponent<PlayerController>();
