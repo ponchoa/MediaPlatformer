@@ -62,6 +62,14 @@ namespace Platformer.Mechanics
                 }
             }
 
+            //if (move.x != 0f)
+            //{
+            //    if (transform.parent.CompareTag("Platform"))
+            //    {
+            //        transform.parent = null;
+            //    }
+            //}
+
             if (move.x > 0.01f)
                 spriteRenderer.flipX = false;
             else if (move.x < -0.01f)

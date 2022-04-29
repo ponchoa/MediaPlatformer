@@ -56,8 +56,13 @@ namespace Platformer.Mechanics
             if (controlEnabled)
             {
                 move.x = Input.GetAxis("Horizontal");
+                //if (Mathf.Abs(move.x) > 0.01f)
+                //    transform.parent = null;
+
                 if (jumpState == JumpState.Grounded && Input.GetButtonDown("Jump"))
+                {
                     jumpState = JumpState.PrepareToJump;
+                }
                 else if (Input.GetButtonUp("Jump"))
                 {
                     stopJump = true;
@@ -107,6 +112,10 @@ namespace Platformer.Mechanics
             if (jump && IsGrounded)
             {
                 velocity.y = jumpTakeOffSpeed * model.jumpModifier;
+                if (transform.parent != null && transform.parent.CompareTag("Platform"))
+                {
+                    transform.parent = null;
+                }
                 jump = false;
             }
             else if (stopJump)

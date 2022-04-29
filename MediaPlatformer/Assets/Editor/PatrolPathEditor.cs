@@ -18,8 +18,8 @@ namespace Platformer
             {
                 Undo.RecordObject(target, "Change Value");
 
-                sp.y = 0;
-                ep.y = 0;
+                //sp.y = 0;
+                //ep.y = 0;
                 path.startPosition = sp;
                 path.endPosition = ep;
                 PrefabUtility.RecordPrefabInstancePropertyModifications(target);
